@@ -230,9 +230,8 @@ class Http
     protected function sendRequest(RequestInterface $request)
     {
         try {
-            $response = $this->httpClient->send($request, [
-                'multipart' => $this->multipartResources
-            ]);
+            $options = count($this->multipartResources) ? ['multipart' => $this->multipartResources] : [];
+            $response = $this->httpClient->send($request, $options);
 
             $this->multipartResources = [];
 
